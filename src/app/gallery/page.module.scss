@@ -1,0 +1,33 @@
+.imageGalleryContainer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(247, 248, 250);
+    margin-top: 40px;
+
+    &::after {
+        content: "";
+        flex-grow: 100;
+    }
+}
+
+.imageWrapper {
+    flex-grow:1;
+    margin: 2px;
+    height: 300px;
+
+    img {
+        width: auto !important;
+        max-height: 300px;
+        height: 300px;
+        object-fit: cover;
+        max-width: 100%;
+        min-width: 100%;
+        vertical-align: bottom;
+    }
+
+}
+
+
+.container {
+    margin-top: 40px;
+}

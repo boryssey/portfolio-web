@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.navlink {
+    font-size: 18px;
+    
+    &.active {
+        font-weight: var(--font-semibold);
+    }
+}
+
+.divider {
+    width: 1px;
+    background-color: var(--color-black);
+}
+

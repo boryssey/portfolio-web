@@ -9,16 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "blurhash": "^2.0.5",
+    "classnames": "^2.5.1",
+    "install": "^0.13.0",
+    "next": "14.1.2",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.1.2"
+    "react-grid-gallery": "1.0.1-alpha.0",
+    "react-pdf": "^7.7.1",
+    "react-photo-album": "^2.3.1",
+    "sass": "^1.71.1",
+    "strapi-plugin-image-optimizer": "^2.1.1",
+    "yet-another-react-lightbox": "^3.17.0"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.1.2"
+    "eslint-config-next": "14.1.2",
+    "eslint-config-prettier": "^9.1.0",
+    "typescript": "^5"
   }
 }
