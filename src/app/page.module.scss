@@ -28,3 +28,13 @@
     margin-left: 8px;
   }
 }
+
+@media (max-width: 768px) {
+  .main {
+    margin-top: 24px;
+  }
+
+  .description {
+    margin-top: 32px;
+  }
+}

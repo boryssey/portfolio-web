@@ -18,20 +18,11 @@ const getCollections = async () => {
 
 const Gallery = async () => {
   const data = await getCollections();
-  console.log("🚀 ~ Gallery ~ data:", data);
 
   return (
     <main className={styles.container}>
       <ImageGallery data={data}></ImageGallery>
     </main>
-
-    // <div className={styles.imageGalleryContainer}>
-    //         {data?.data?.attributes?.images.data.map(({attributes}: any) => (
-    //             <div className={styles.imageWrapper} key={attributes.hash} >
-    //                     <Image src={attributes.formats.medium.url} width={attributes.formats.medium.width} height={attributes.formats.medium.height} alt={attributes.alternativeText} />
-    //             </div>
-    //         ))}
-    // </div>
   );
 };
 

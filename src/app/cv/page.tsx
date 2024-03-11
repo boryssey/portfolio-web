@@ -12,7 +12,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const CV = () => {
   const { width, height } = useWindowSize();
-  const pageWidth = Math.min((width || 1920) - 160, 1280 - 160);
+  console.log("🚀 ~ CV ~ width:", width);
+  const pageWidth = Math.min(width - (width < 768 ? 10 : 160), 1280 - 160);
   console.log({ pageWidth, width });
   return (
     <main className={styles.documentContainer}>

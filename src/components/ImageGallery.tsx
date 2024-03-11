@@ -31,7 +31,6 @@ function NextJsImage({
 }
 
 const ImageGallery = (data: any) => {
-  console.log("🚀 ~ ImageGallery ~ data:", data);
   const { lightboxIndex, selectIndex, renderLightbox } = useLightbox();
 
   const { width } = useWindowSize();

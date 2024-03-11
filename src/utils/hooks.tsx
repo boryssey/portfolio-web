@@ -7,11 +7,11 @@ export const useWindowSize = () => {
     // detect window screen width function
   }
   const [windowSize, setWindowSize] = useState<{
-    width: number | undefined;
-    height: number | undefined;
+    width: number;
+    height: number;
   }>({
-    width: undefined,
-    height: undefined,
+    width: 0,
+    height: 0,
   });
 
   useEffect(() => {
@@ -23,6 +23,9 @@ export const useWindowSize = () => {
     };
 
     window.addEventListener("resize", handleResize);
+    if (typeof window !== "undefined") {
+      handleResize();
+    }
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
