@@ -5,7 +5,7 @@ import ImageGallery from "@/components/ImageGallery";
 
 const getCollections = async () => {
   const res = await fetch(
-    "http://localhost:1337/api/collections/2?populate=images",
+    "https://cdn.boryssey.com/api/collections/2?populate=images",
     {
       next: { revalidate: 1 },
     }
