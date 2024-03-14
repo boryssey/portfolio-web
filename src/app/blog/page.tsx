@@ -4,10 +4,7 @@ import { blurHashToDataURL } from "@/utils/helpers";
 
 const getArticles = async () => {
   const res = await fetch(
-    "https://cdn.boryssey.com/api/articles?populate=preview",
-    {
-      next: { revalidate: 1 },
-    }
+    "https://cdn.boryssey.com/api/articles?populate=preview"
   );
   if (!res.ok) {
     throw new Error("Failed to fetch articles");

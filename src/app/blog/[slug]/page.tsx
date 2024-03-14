@@ -7,10 +7,7 @@ import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const getArticle = async (slug: string) => {
   const res = await fetch(
-    `https://cdn.boryssey.com/api/slugify/slugs/article/${slug}`,
-    {
-      next: { revalidate: 0 },
-    }
+    `https://cdn.boryssey.com/api/slugify/slugs/article/${slug}`
   );
   if (!res.ok) {
     if (res.status === 404) {
