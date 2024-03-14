@@ -10,29 +10,24 @@
   --color-black: #000;
 }
 
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-html, 
 body {
-    min-height: 100%;
-}
-
-html {
+	min-height: 100vh;
+	width: 100%;
+	padding: 40px 80px 20px 80px;
+	max-width: 1920px;
 	display: flex;
-	align-items: center;
 	flex-direction: column;
 }
 
-body {
-  width: 100%;
-  padding: 40px 80px;
-  max-width: 1920px;
-  margin: 0 auto;
+main {
+	margin-top: 40px;
+	flex: 1;
 }
 
 //media max-width 768px
@@ -72,14 +67,6 @@ html {
 	tab-size: 4; /* 3 */
 }
 
-/*
-Sections
-========
-*/
-
-body {
-	margin: 0; /* Remove the margin in all browsers. */
-}
 
 /*
 Grouping content
@@ -312,3 +299,4 @@ Add the correct display in Chrome and Safari.
 summary {
 	display: list-item;
 }
+
