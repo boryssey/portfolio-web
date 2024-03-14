@@ -26,7 +26,6 @@ function NextJsImage({ slide, offset, rect }: RenderSlideProps) {
   } = useLightboxProps();
 
   const { currentIndex } = useLightboxState();
-  console.log("🚀 ~ NextJsImage ~ currentIndex:", currentIndex);
 
   const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit);
 

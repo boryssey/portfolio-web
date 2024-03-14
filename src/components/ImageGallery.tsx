@@ -2,7 +2,6 @@
 import { blurHashToDataURL } from "@/utils/helpers";
 import { useWindowSize } from "@/utils/hooks";
 import Image from "next/image";
-import { useState } from "react";
 
 import PhotoAlbum, {
   Photo,
@@ -31,7 +30,7 @@ function NextJsImage({
 }
 
 const ImageGallery = (data: any) => {
-  const { lightboxIndex, selectIndex, renderLightbox } = useLightbox();
+  const { selectIndex, renderLightbox } = useLightbox();
 
   const { width } = useWindowSize();
 
@@ -40,7 +39,8 @@ const ImageGallery = (data: any) => {
       src: attributes.url,
       width: attributes.width,
       height: attributes.height,
-      blurDataURL: blurHashToDataURL(attributes.blurhash),
+      blurDataURL:
+        attributes.blurhash && blurHashToDataURL(attributes.blurhash),
       srcSet: [
         {
           src: attributes.formats.small.url,
