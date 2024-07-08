@@ -7,6 +7,7 @@ import Link from "next/link";
 import LinkedinIcon from "@/components/icons/LinkedinIcon";
 import GithubIcon from "@/components/icons/GithubIcon";
 import MediumIcon from "@/components/icons/MediumIcon";
+import { Analytics } from "@vercel/analytics/react";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -38,6 +39,7 @@ export default function RootLayout({
             <MediumIcon />
           </Link>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
