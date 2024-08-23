@@ -2,28 +2,37 @@
 import { blurHashToDataURL } from "@/utils/helpers";
 import { useWindowSize } from "@/utils/hooks";
 import Image from "next/image";
+import { UnstableSSR as SSR } from "react-photo-album/ssr";
+import "react-photo-album/rows.css";
 
 import PhotoAlbum, {
   Photo,
+  RenderImageContext,
+  RenderImageProps,
   RenderPhoto,
   RenderPhotoProps,
 } from "react-photo-album";
 import useLightbox from "./Lightbox/useLightbox";
 
-function NextJsImage({
-  photo,
-  imageProps: { alt, title, sizes, className, onClick, blurDataURL },
-  wrapperStyle,
-}: RenderPhotoProps & {
-  imageProps: RenderPhotoProps["imageProps"] & { blurDataURL: string };
-}) {
+function NextJsImage(
+  { alt = "", title, sizes }: RenderImageProps,
+  { photo, width, height }: RenderImageContext
+) {
   return (
-    <div style={{ ...wrapperStyle, position: "relative" }}>
+    <div
+      style={{
+        width: "100%",
+        position: "relative",
+        aspectRatio: `${width} / ${height}`,
+      }}
+    >
       <Image
         fill
         src={photo}
+        alt={alt}
+        title={title}
+        sizes={sizes}
         placeholder={"blurDataURL" in photo ? "blur" : undefined}
-        {...{ alt, title, sizes, className, onClick, blurDataURL }}
       />
     </div>
   );
@@ -63,15 +72,24 @@ const ImageGallery = (data: any) => {
 
   return (
     <>
-      <PhotoAlbum
-        photos={images}
-        layout="rows"
-        renderPhoto={NextJsImage as RenderPhoto<Photo>}
-        targetRowHeight={300}
-        defaultContainerWidth={Math.min((width || 1200) - 160, 1920 - 160)}
-        sizes={{ size: "min(1920px - 160px, calc(100vw - 160px))" }}
-        onClick={({ index }) => selectIndex(index)}
-      />
+      <SSR breakpoints={[240, 380, 600, 900]}>
+        <PhotoAlbum
+          photos={images}
+          layout="rows"
+          // renderPhoto={NextJsImage as RenderPhoto<Photo>}
+          // render={{ image: NextJsImage as RenderPhoto<Photo> }}
+          targetRowHeight={200}
+          // defaultContainerWidth={Math.min((width || 1200) - 160, 1920 - 160)}
+          // sizes={{ size: "min(1920px - 160px, calc(100vw - 160px))" }}
+          sizes={{
+            size: "1168px",
+            sizes: [
+              { viewport: "(max-width: 1200px)", size: "calc(100vw - 32px)" },
+            ],
+          }}
+          onClick={({ index }) => selectIndex(index)}
+        />
+      </SSR>
       {renderLightbox({
         slides: images,
       })}

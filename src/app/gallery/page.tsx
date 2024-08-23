@@ -3,10 +3,10 @@ import styles from "./page.module.scss";
 // import { Gallery as GridGallery } from "react-grid-gallery";
 import ImageGallery from "@/components/ImageGallery";
 
+const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/collections/2?populate=images`;
+
 const getCollections = async () => {
-  const res = await fetch(
-    "https://cdn.boryssey.com/api/collections/2?populate=images"
-  );
+  const res = await fetch(url);
   if (!res.ok) {
     throw new Error("Failed to fetch collections");
   }
