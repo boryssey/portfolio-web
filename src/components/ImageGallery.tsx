@@ -1,100 +1,88 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 "use client";
-import { blurHashToDataURL } from "@/utils/helpers";
-import { useWindowSize } from "@/utils/hooks";
-import Image from "next/image";
-import { UnstableSSR as SSR } from "react-photo-album/ssr";
 import "react-photo-album/rows.css";
 
-import PhotoAlbum, {
+import {
   Photo,
+  RenderImage,
   RenderImageContext,
   RenderImageProps,
-  RenderPhoto,
-  RenderPhotoProps,
+  RenderPhotoContext,
+  RowsPhotoAlbum,
+  RowsPhotoAlbumProps,
 } from "react-photo-album";
 import useLightbox from "./Lightbox/useLightbox";
+import { useEffect, useRef, useState } from "react";
 
-function NextJsImage(
-  { alt = "", title, sizes }: RenderImageProps,
-  { photo, width, height }: RenderImageContext
-) {
+const Image = (props: RenderImageProps & { blurDataURL: string }) => {
+  const { blurDataURL, ...imageProps } = props;
+  const [isLoaded, setIsLoaded] = useState(false);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  const onImageLoad = () => {
+    setIsLoaded(true);
+  };
+
+  useEffect(() => {
+    if (imageRef.current && imageRef.current.complete) {
+      onImageLoad();
+    }
+  }, []);
+
+  const backgroundImage = !isLoaded ? `url("${blurDataURL}")` : null;
+  const placeholderStyle = backgroundImage
+    ? {
+        backgroundImage,
+        filter: "blur(0px)",
+        backgroundSize: "cover",
+        backgroundPosition: "0% 0%",
+      }
+    : {};
+
   return (
-    <div
+    <img
+      {...imageProps}
+      ref={imageRef}
+      onLoad={onImageLoad}
       style={{
-        width: "100%",
-        position: "relative",
-        aspectRatio: `${width} / ${height}`,
+        ...imageProps.style,
+        ...placeholderStyle,
       }}
-    >
-      <Image
-        fill
-        src={photo}
-        alt={alt}
-        title={title}
-        sizes={sizes}
-        placeholder={"blurDataURL" in photo ? "blur" : undefined}
-      />
-    </div>
+    />
   );
-}
+};
 
-const ImageGallery = (data: any) => {
+type PhotoWithDataURL<TPhoto extends Photo> = TPhoto & {
+  blurDataURL: string;
+};
+
+function ImageGallery<TPhoto extends Photo>(
+  props: RowsPhotoAlbumProps<TPhoto>
+) {
   const { selectIndex, renderLightbox } = useLightbox();
-
-  const { width } = useWindowSize();
-
-  const images = data?.data?.data?.attributes?.images.data.map(
-    ({ attributes }: any) => ({
-      src: attributes.url,
-      width: attributes.width,
-      height: attributes.height,
-      blurDataURL:
-        attributes.blurhash && blurHashToDataURL(attributes.blurhash),
-      srcSet: [
-        {
-          src: attributes.formats.small.url,
-          width: attributes.formats.small.width,
-          height: attributes.formats.small.height,
-        },
-        {
-          src: attributes.formats.medium.url,
-          width: attributes.formats.medium.width,
-          height: attributes.formats.medium.height,
-        },
-        {
-          src: attributes.formats.large.url,
-          width: attributes.formats.large.width,
-          height: attributes.formats.large.height,
-        },
-      ],
-    })
-  );
 
   return (
     <>
-      <SSR breakpoints={[240, 380, 600, 900]}>
-        <PhotoAlbum
-          photos={images}
-          layout="rows"
-          // renderPhoto={NextJsImage as RenderPhoto<Photo>}
-          // render={{ image: NextJsImage as RenderPhoto<Photo> }}
-          targetRowHeight={200}
-          // defaultContainerWidth={Math.min((width || 1200) - 160, 1920 - 160)}
-          // sizes={{ size: "min(1920px - 160px, calc(100vw - 160px))" }}
-          sizes={{
-            size: "1168px",
-            sizes: [
-              { viewport: "(max-width: 1200px)", size: "calc(100vw - 32px)" },
-            ],
-          }}
-          onClick={({ index }) => selectIndex(index)}
-        />
-      </SSR>
+      <RowsPhotoAlbum
+        {...props}
+        render={{
+          image: (imageProps, context) => (
+            <Image
+              {...imageProps}
+              blurDataURL={
+                (context.photo as PhotoWithDataURL<TPhoto>).blurDataURL
+              }
+            />
+          ),
+        }}
+        onClick={({ index }) => selectIndex(index)}
+      />
       {renderLightbox({
-        slides: images,
+        slides: props.photos,
       })}
     </>
   );
-};
+}
 
 export default ImageGallery;
