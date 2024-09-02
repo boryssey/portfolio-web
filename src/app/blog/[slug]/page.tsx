@@ -7,7 +7,8 @@ import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const getArticle = async (slug: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/slugify/slugs/article/${slug}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/slugify/slugs/article/${slug}`,
+    { cache: "force-cache" }
   );
   if (!res.ok) {
     if (res.status === 404) {
@@ -63,5 +64,18 @@ const ArticlePage = async ({
     </main>
   );
 };
+
+export const dynamic = "force-static";
+
+
+export async function generateStaticParams() {
+  const articles = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/articles`
+  ).then((res) => res.json());
+  return articles.data.map(({ attributes }: any) => ({
+    slug: attributes.slug,
+  }));
+}
+
 
 export default ArticlePage;
