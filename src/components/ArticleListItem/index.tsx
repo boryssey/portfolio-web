@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./articleListItem.module.scss";
 import { DateTime } from "ts-luxon";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import VerticalDivider from "../VerticalDivider";
 
 const ArticleListItem = ({
@@ -49,10 +49,10 @@ const ArticleListItem = ({
               className={styles.articlePreview}
               alt={title}
               src={preview.imageURL}
-              layout="fill"
-              objectFit="contain"
               placeholder={"blurDataURL" in preview ? "blur" : undefined}
               blurDataURL={preview.blurDataURL}
+              fill
+              sizes="100vw"
             />
           </div>
         )}

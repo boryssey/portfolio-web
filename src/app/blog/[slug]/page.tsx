@@ -7,7 +7,7 @@ import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const getArticle = async (slug: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/articles/slugify/slugs/article/${slug}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/slugify/slugs/article/${slug}`
   );
   if (!res.ok) {
     if (res.status === 404) {
