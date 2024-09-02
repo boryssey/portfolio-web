@@ -1,7 +1,5 @@
-// import Image from "next/image";
 import { blurHashToDataURL } from "@/utils/helpers";
 import styles from "./page.module.scss";
-// import { Gallery as GridGallery } from "react-grid-gallery";
 import ImageGallery from "@/components/ImageGallery";
 import { UnstableSSR as SSR } from "react-photo-album/ssr";
 
@@ -22,6 +20,7 @@ const Gallery = async () => {
       src: attributes.url,
       width: attributes.width,
       height: attributes.height,
+      alt: attributes.name,
       blurDataURL:
         attributes.blurhash && blurHashToDataURL(attributes.blurhash),
       srcSet: [
@@ -39,6 +38,11 @@ const Gallery = async () => {
           src: attributes.formats.large.url,
           width: attributes.formats.large.width,
           height: attributes.formats.large.height,
+        },
+        {
+          src: attributes.url,
+          width: attributes.width,
+          height: attributes.height,
         },
       ],
     })

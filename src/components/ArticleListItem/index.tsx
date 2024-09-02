@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./articleListItem.module.scss";
 import { DateTime } from "ts-luxon";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import VerticalDivider from "../VerticalDivider";
 
 const ArticleListItem = ({
