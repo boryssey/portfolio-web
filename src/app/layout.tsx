@@ -8,6 +8,7 @@ import LinkedinIcon from "@/components/icons/LinkedinIcon";
 import GithubIcon from "@/components/icons/GithubIcon";
 import MediumIcon from "@/components/icons/MediumIcon";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -40,6 +41,7 @@ export default function RootLayout({
           </Link>
         </footer>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
