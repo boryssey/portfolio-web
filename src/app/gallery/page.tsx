@@ -53,8 +53,6 @@ const Gallery = async () => {
         <ImageGallery
           photos={images}
           targetRowHeight={300}
-          // defaultContainerWidth={Math.min((width || 1200) - 160, 1920 - 160)}
-          // sizes={{ size: "min(1920px - 160px, calc(100vw - 160px))" }}
           sizes={{
             size: "min(1920px - 160px, calc(100vw - 160px))",
             sizes: [

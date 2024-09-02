@@ -30,13 +30,13 @@ export default function RootLayout({
         <NavBar />
         {children}
         <footer className={styles.footer}>
-          <Link href="https://linkedin.com/borys-melnyk">
+          <Link aria-label="linkedin" href="https://linkedin.com/borys-melnyk">
             <LinkedinIcon />
           </Link>
-          <Link href="https://github.com/boryssey">
+          <Link aria-label="github" href="https://github.com/boryssey">
             <GithubIcon />
           </Link>
-          <Link href="https://boryssey.medium.com/">
+          <Link aria-label="medium" href="https://boryssey.medium.com/">
             <MediumIcon />
           </Link>
         </footer>
