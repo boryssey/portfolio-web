@@ -49,16 +49,16 @@ const Gallery = async () => {
   );
   return (
     <main className={styles.container}>
-      <SSR breakpoints={[400, 600, 800]}>
+      <SSR breakpoints={[400, 600, 800, 1000]}>
         <ImageGallery
           photos={images}
           targetRowHeight={300}
           // defaultContainerWidth={Math.min((width || 1200) - 160, 1920 - 160)}
           // sizes={{ size: "min(1920px - 160px, calc(100vw - 160px))" }}
           sizes={{
-            size: "1168px",
+            size: "min(1920px - 160px, calc(100vw - 160px))",
             sizes: [
-              { viewport: "(max-width: 1200px)", size: "calc(100vw - 160px)" },
+              { viewport: "(max-width: 768px)", size: "calc(100vw - 32px)" },
             ],
           }}
         />
