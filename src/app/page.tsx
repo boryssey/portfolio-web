@@ -9,7 +9,7 @@ export default function Home() {
       <h3 className={styles.jobTitle}>Software Engineer</h3>
       <div className={styles.description}>
         <p>
-          I am a Full-Stack engineer with 4 years of professional development
+          I am a Full-Stack engineer with 5 years of professional development
           experience. Specialise in development with React, Next.js, and
           Express.JS. <br />
           Experienced in planning, developing and testing WebApps, Browser
